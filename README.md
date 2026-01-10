@@ -93,7 +93,7 @@ Create a `.env.local` file in the root directory (optional):
 
 ```env
 # Optional: Site URL for SEO and metadata
-NEXT_PUBLIC_SITE_URL=https://zentrae.com
+NEXT_PUBLIC_SITE_URL=https://zentrae.in
 ```
 
 ### Contact Form
@@ -121,4 +121,4 @@ The contact form uses a simple **mailto link** approach - no backend configurati
 
 ## License
 
-© 2024 ZENTRAE. All rights reserved.
+© 2026 ZENTRAE. All rights reserved.
