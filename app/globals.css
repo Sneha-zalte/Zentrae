@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 210 40% 98%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 222 47% 11%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 222 47% 11%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 210 40% 98%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Optimize for animations */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* GPU acceleration for animations */
+  [data-animated] {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Focus visible for accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-ocean {
+    background: linear-gradient(135deg, #1890ff 0%, #0050b3 50%, #002766 100%);
+  }
+
+  .gradient-dream {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+  }
+
+  .glass {
+    @apply backdrop-blur-md bg-white/60 dark:bg-black/10 border border-ocean-200/30 dark:border-white/10 shadow-sm;
+  }
+
+  .glass-strong {
+    @apply backdrop-blur-xl bg-white/80 dark:bg-black/20 border border-ocean-300/40 dark:border-white/20 shadow-md;
+  }
+}
+
+/* Hide scrollbar but keep functionality */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
