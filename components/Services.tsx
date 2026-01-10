@@ -175,7 +175,7 @@ export function Services() {
             </span>
           </h2>
           <p className="text-lg sm:text-xl text-foreground/70 dark:text-foreground/80 max-w-3xl mx-auto text-balance font-medium">
-            We don't offer random services. We build structured systems that help brands navigate social media with clarity and consistency.
+            We don&apos;t offer random services. We build structured systems that help brands navigate social media with clarity and consistency.
           </p>
         </motion.div>
 

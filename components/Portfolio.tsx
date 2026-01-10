@@ -86,7 +86,7 @@ export function Portfolio() {
             <span className="text-foreground">That Speak for Themselves</span>
           </h2>
           <p className="text-lg sm:text-xl text-foreground/70 max-w-3xl mx-auto text-balance">
-            See how we've helped brands navigate the social media landscape
+            See how we&apos;ve helped brands navigate the social media landscape
             and achieve remarkable results.
           </p>
         </motion.div>

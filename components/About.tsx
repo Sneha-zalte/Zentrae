@@ -345,7 +345,7 @@ export function About() {
             <div className="text-center space-y-4">
               <h3 className="text-3xl sm:text-4xl font-bold text-foreground">
                 <span className="bg-gradient-to-r from-ocean-600 to-dream-600 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
-                  Who We're Built For
+                  Who We&apos;re Built For
                 </span>
               </h3>
               <p className="text-base sm:text-lg text-foreground/70 dark:text-foreground/80 max-w-2xl mx-auto font-medium">

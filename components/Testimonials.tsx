@@ -130,7 +130,7 @@ export function Testimonials() {
             </span>
           </h2>
           <p className="text-lg sm:text-xl text-foreground/70 max-w-3xl mx-auto text-balance">
-            Don't just take our word for it. Hear from businesses that have
+            Don&apos;t just take our word for it. Hear from businesses that have
             navigated success with ZENTRAE as their guide.
           </p>
         </motion.div>
@@ -164,7 +164,7 @@ export function Testimonials() {
                     transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
                     className="text-6xl text-ocean-500/30 dark:text-ocean-400/30"
                   >
-                    "
+                    &quot;
                   </motion.div>
 
                   {/* Testimonial Text */}

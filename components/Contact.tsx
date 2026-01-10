@@ -44,7 +44,7 @@ export function Contact() {
               <span className="text-foreground">Your Social Journey?</span>
             </h2>
             <p className="text-lg sm:text-xl text-foreground/70 max-w-3xl mx-auto text-balance">
-              Let's dive into your brand's potential. Reach out and discover how
+              Let&apos;s dive into your brand&apos;s potential. Reach out and discover how
               ZENTRAE can guide you through the social media ocean.
             </p>
           </motion.div>
@@ -60,11 +60,11 @@ export function Contact() {
             >
               <div>
                 <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
-                  Let's Connect
+                  Let&apos;s Connect
                 </h3>
                 <p className="text-foreground/70 text-lg leading-relaxed mb-8">
-                  Whether you're a local business ready to expand your reach or a D2C brand
-                  looking to make waves, we're here to help you navigate the social media
+                  Whether you&apos;re a local business ready to expand your reach or a D2C brand
+                  looking to make waves, we&apos;re here to help you navigate the social media
                   landscape with confidence.
                 </p>
               </div>
