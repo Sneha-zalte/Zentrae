@@ -1,20 +1,29 @@
 'use client'
 
-import { useRef, Suspense } from 'react'
+import { useRef, Suspense, useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { OceanScene } from './OceanScene'
 import { cn } from '@/lib/utils'
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [contentVisible, setContentVisible] = useState(false)
+
+  useEffect(() => {
+    // Delay content visibility to let Canvas initialize first
+    const timer = setTimeout(() => {
+      setContentVisible(true)
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-ocean-50/80 via-dream-50/60 to-background dark:from-ocean-950 dark:via-dream-950 dark:to-background"
+      className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-background via-background to-background dark:from-ocean-950 dark:via-dream-950 dark:to-background"
       style={{ overflowY: 'visible' }}
     >
       {/* 3D Ocean Background */}
@@ -55,13 +64,16 @@ export function Hero() {
           <div className="w-full max-w-5xl mx-auto px-6 py-20 rounded-3xl backdrop-blur-sm bg-white/10 dark:bg-black/10 opacity-0 dark:opacity-0" />
         </div>
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="relative z-10 space-y-2 sm:space-y-3 md:space-y-4 overflow-visible"
-          style={{ overflow: 'visible' }}
-        >
+        <AnimatePresence>
+          {contentVisible && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="relative z-10 space-y-2 sm:space-y-3 md:space-y-4 overflow-visible"
+              style={{ overflow: 'visible' }}
+            >
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,8 +95,8 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl sm:text-2xl font-semibold text-ocean-800 dark:text-gray-300 dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] max-w-3xl mx-auto leading-relaxed -mt-6 sm:-mt-8 md:-mt-10"
           >
-            We guide local businesses and D2C brands through the<br className="hidden sm:block" />
-            ever-changing tides of social media marketing.<br />
+            We guide local businesses and D2C brands through <br className="hidden sm:block" />
+            the ever-changing tides of social media marketing.<br />
             <span className="block mt-2 font-bold text-ocean-900 dark:bg-gradient-to-r dark:from-white dark:via-gray-100 dark:to-gray-300 dark:bg-clip-text dark:text-transparent dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
               Trust ZENTRAE to be your compass.
             </span>
@@ -99,25 +111,25 @@ export function Hero() {
             <motion.a
               href="#contact"
               className={cn(
-                'px-12 py-5 rounded-full font-bold text-xl',
+                'px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg md:text-xl',
                 'bg-ocean-800 hover:bg-ocean-900 text-white',
                 'dark:bg-ocean-600 dark:hover:bg-ocean-700 dark:text-white',
                 'transition-all duration-300 shadow-lg hover:shadow-xl',
                 'transform hover:scale-105 active:scale-95',
                 'no-underline relative tracking-wide',
-                'flex items-center justify-center gap-3'
+                'flex items-center justify-center gap-2 sm:gap-3'
               )}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Start Your Journey
               <motion.svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
+                className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="transition-transform duration-300"
                 whileHover={{ x: 4 }}
               >
                 <path
@@ -130,7 +142,9 @@ export function Hero() {
               </motion.svg>
             </motion.a>
           </motion.div>
-        </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Animated Background Elements */}

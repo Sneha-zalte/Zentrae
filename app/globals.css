@@ -4,16 +4,16 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 100%;
+    --foreground: 222 47% 8%;
     --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
+    --muted-foreground: 215 16% 40%;
+    --border: 214 32% 85%;
+    --input: 214 32% 85%;
     --primary: 199 89% 48%;
-    --primary-foreground: 210 40% 98%;
+    --primary-foreground: 0 0% 100%;
     --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 11%;
+    --accent-foreground: 222 47% 8%;
   }
 
   .dark {
@@ -84,11 +84,11 @@
   }
 
   .glass {
-    @apply backdrop-blur-md bg-white/60 dark:bg-black/10 border border-ocean-200/30 dark:border-white/10 shadow-sm;
+    @apply backdrop-blur-md bg-white/70 dark:bg-black/10 border border-ocean-800/20 dark:border-white/10 shadow-sm;
   }
 
   .glass-strong {
-    @apply backdrop-blur-xl bg-white/80 dark:bg-black/20 border border-ocean-300/40 dark:border-white/20 shadow-md;
+    @apply backdrop-blur-xl bg-white/90 dark:bg-black/20 border border-ocean-800/30 dark:border-white/20 shadow-md;
   }
 }
 

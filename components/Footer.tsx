@@ -26,11 +26,11 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative border-t border-ocean-500/20 bg-gradient-to-b from-background to-ocean-950/20 dark:to-ocean-950/40">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <footer className="relative border-t border-ocean-800/20 bg-gradient-to-b from-background to-ocean-950/20 dark:to-ocean-950/40">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
         <div className="max-w-6xl mx-auto">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
             {/* Brand Column */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -45,12 +45,12 @@ export function Footer() {
                   alt="ZENTRAE Logo"
                   width={240}
                   height={80}
-                  className="h-auto w-auto object-contain"
-                  style={{ maxWidth: '240px', height: 'auto' }}
+                  className="h-auto w-auto object-contain max-w-[200px] sm:max-w-[240px]"
+                  style={{ height: 'auto' }}
                   priority
                 />
               </div>
-              <p className="text-foreground/70 leading-relaxed max-w-md mb-4">
+              <p className="text-sm sm:text-base text-foreground/70 leading-relaxed max-w-md mb-4">
                 Your trusted guide through the ocean of social content. We help local businesses
                 and D2C brands navigate the ever-changing tides of social media marketing.
               </p>
@@ -104,7 +104,7 @@ export function Footer() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="w-10 h-10 rounded-full glass hover:glass-strong flex items-center justify-center text-foreground/70 hover:text-ocean-500 dark:hover:text-ocean-400 transition-all duration-300 group"
+                    className="w-10 h-10 rounded-full glass hover:glass-strong flex items-center justify-center text-foreground/70 hover:text-ocean-800 dark:hover:text-ocean-400 transition-all duration-300 group"
                     aria-label={platform.name}
                   >
                     <div className="group-hover:scale-110 transition-transform duration-300">
@@ -115,60 +115,63 @@ export function Footer() {
               </div>
             </motion.div>
 
-            {/* Quick Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
-              <ul className="space-y-3">
-                {footerLinks.map((link) => (
-                  <li key={link.label}>
-                    <motion.a
-                      href={link.href}
-                      onClick={(e) => handleLinkClick(e, link.href)}
-                      whileHover={{ x: 4 }}
-                      className="text-foreground/70 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors duration-300 inline-block"
-                    >
-                      {link.label}
-                    </motion.a>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+            {/* Quick Links and Get in Touch - Side by side on mobile */}
+            <div className="grid grid-cols-2 lg:col-span-2 lg:grid-cols-2 gap-6 sm:gap-8">
+              {/* Quick Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
+                <ul className="space-y-3">
+                  {footerLinks.map((link) => (
+                    <li key={link.label}>
+                      <motion.a
+                        href={link.href}
+                        onClick={(e) => handleLinkClick(e, link.href)}
+                        whileHover={{ x: 4 }}
+                        className="text-foreground/70 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors duration-300 inline-block text-sm sm:text-base"
+                      >
+                        {link.label}
+                      </motion.a>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
 
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <h4 className="font-semibold text-foreground mb-4">Get in Touch</h4>
-              <ul className="space-y-3">
-                <li>
-                  <a
-                    href="mailto:zentraeindia@gmail.com"
-                    className="text-foreground/70 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors duration-300 inline-block"
-                  >
-                    zentraeindia@gmail.com
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="tel:+918657684375"
-                    className="text-foreground/70 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors duration-300 inline-block"
-                  >
-                    8657684375
-                  </a>
-                </li>
-                <li>
-                  <p className="text-foreground/70">Mumbai</p>
-                </li>
-              </ul>
-            </motion.div>
+              {/* Contact Info */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <h4 className="font-semibold text-foreground mb-4">Get in Touch</h4>
+                <ul className="space-y-3">
+                  <li>
+                    <a
+                      href="mailto:zentraeindia@gmail.com"
+                      className="text-foreground/70 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors duration-300 inline-block text-sm sm:text-base break-words"
+                    >
+                      zentraeindia@gmail.com
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="tel:+918657684375"
+                      className="text-foreground/70 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors duration-300 inline-block text-sm sm:text-base"
+                    >
+                      8657684375
+                    </a>
+                  </li>
+                  <li>
+                    <p className="text-foreground/70 text-sm sm:text-base">Mumbai</p>
+                  </li>
+                </ul>
+              </motion.div>
+            </div>
           </div>
 
           {/* Bottom Bar */}
@@ -177,7 +180,7 @@ export function Footer() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="pt-8 border-t border-ocean-500/20 flex flex-col sm:flex-row justify-between items-center gap-4"
+            className="pt-8 border-t border-ocean-800/20 flex flex-col sm:flex-row justify-between items-center gap-4"
           >
             <p className="text-foreground/60 text-sm">
               © {currentYear} ZENTRAE. All rights reserved.
@@ -187,7 +190,7 @@ export function Footer() {
       </div>
 
       {/* Decorative wave at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-ocean-500 to-transparent opacity-30" />
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-ocean-800 to-transparent opacity-30" />
     </footer>
   )
 }

@@ -1,166 +1,29 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
-
+import { cn } from '@/lib/utils'
 
 export function About() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (typeof window !== 'undefined' && sectionRef.current && contentRef.current) {
-        // Animate header
-        const headerEl = contentRef.current.querySelector('.about-header')
-        if (headerEl) {
-          gsap.fromTo(
-            headerEl,
-            {
-              opacity: 0,
-              y: 40,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: 'top 75%',
-                toggleActions: 'play none none none',
-              },
-            }
-          )
-        }
-
-        // Animate "Who We're Built For" section
-        const whoBuiltForSection = contentRef.current.querySelector('.who-we-built-for')
-        if (whoBuiltForSection) {
-          gsap.fromTo(
-            whoBuiltForSection,
-            {
-              opacity: 0,
-              y: 60,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: whoBuiltForSection,
-                start: 'top 80%',
-                toggleActions: 'play none none none',
-              },
-            }
-          )
-
-          // Animate "Who We're Built For" cards with stagger
-          const profileCards = whoBuiltForSection.querySelectorAll('.profile-card')
-          if (profileCards.length > 0) {
-            gsap.fromTo(
-              profileCards,
-              {
-                opacity: 0,
-                y: 40,
-                scale: 0.95,
-              },
-              {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.7,
-                stagger: 0.1,
-                ease: 'power2.out',
-                scrollTrigger: {
-                  trigger: whoBuiltForSection,
-                  start: 'top 80%',
-                  toggleActions: 'play none none none',
-                },
-              }
-            )
-          }
-        }
-
-        // Animate "How We Work" section
-        const howWeWorkSection = contentRef.current.querySelector('.how-we-work')
-        if (howWeWorkSection) {
-          gsap.fromTo(
-            howWeWorkSection,
-            {
-              opacity: 0,
-              y: 60,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: howWeWorkSection,
-                start: 'top 80%',
-                toggleActions: 'play none none none',
-              },
-            }
-          )
-
-          // Animate timeline items with stagger
-          const timelineItems = howWeWorkSection.querySelectorAll('.timeline-item')
-          if (timelineItems.length > 0) {
-            gsap.fromTo(
-              timelineItems,
-              {
-                opacity: 0,
-                x: (index) => (index % 2 === 0 ? -50 : 50),
-                scale: 0.9,
-              },
-              {
-                opacity: 1,
-                x: 0,
-                scale: 1,
-                duration: 0.8,
-                stagger: 0.12,
-                ease: 'power3.out',
-                scrollTrigger: {
-                  trigger: howWeWorkSection,
-                  start: 'top 75%',
-                  toggleActions: 'play none none none',
-                },
-              }
-            )
-          }
-        }
-      }
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
-
   return (
     <section
       id="about"
-      ref={sectionRef}
-      className="relative min-h-screen py-20 sm:py-32 overflow-hidden bg-gradient-to-b from-background via-ocean-50/30 to-background dark:via-ocean-950/30"
+      className="relative min-h-screen py-20 sm:py-32 overflow-hidden bg-gradient-to-b from-background via-ocean-50/60 to-background dark:from-background dark:via-ocean-950/30 dark:to-background"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={contentRef} className="max-w-6xl mx-auto space-y-16 sm:space-y-20 md:space-y-24">
+      {/* Subtle decorative gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-ocean-200/30 via-transparent to-dream-200/30 dark:from-ocean-900/20 dark:via-transparent dark:to-dream-900/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,58,140,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_50%,rgba(40,169,255,0.05),transparent_50%)] pointer-events-none" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-6xl mx-auto space-y-16 sm:space-y-20 md:space-y-24">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="text-center about-header"
+            className="text-center"
           >
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-ocean-500 to-dream-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-ocean-800 to-ocean-900 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
                 Your Guide Through
               </span>
               <br />
@@ -179,10 +42,10 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8 how-we-work"
+            className="space-y-8"
           >
             <h3 className="text-3xl sm:text-4xl font-bold text-foreground mb-8 text-center">
-              <span className="bg-gradient-to-r from-ocean-600 to-dream-600 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-ocean-800 to-ocean-900 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
                 How We Work
               </span>
             </h3>
@@ -190,7 +53,7 @@ export function About() {
             {/* Timeline Flow */}
             <div className="relative max-w-5xl mx-auto">
               {/* Timeline Line - Hidden on mobile, visible on desktop */}
-              <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-ocean-400 via-dream-400 to-ocean-400 transform -translate-x-1/2 opacity-30" />
+              <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-ocean-800 via-ocean-900 to-ocean-800 transform -translate-x-1/2 opacity-30" />
               
               <div className="space-y-8 lg:space-y-12">
                 {[
@@ -270,9 +133,9 @@ export function About() {
                     key={step.number}
                     initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                    className="relative timeline-item"
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                    className="relative"
                   >
                     {/* Timeline Item */}
                     <div className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-8 ${
@@ -281,25 +144,25 @@ export function About() {
                       {/* Content Card */}
                       <div className="flex-1 w-full lg:w-auto">
                         <motion.div
-                          whileHover={{ y: -5, scale: 1.02 }}
-                          className="p-6 lg:p-8 rounded-2xl glass hover:glass-strong transition-all duration-300 border-2 border-transparent hover:border-ocean-500/30"
+                          whileHover={{ y: -4 }}
+                          className="p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl glass hover:glass-strong transition-all duration-300 border-2 border-transparent hover:border-ocean-800/30"
                         >
-                          <div className="flex items-start gap-4">
+                          <div className="flex items-start gap-3 sm:gap-4">
                             <div className="flex-shrink-0">
-                              <div className="w-14 h-14 rounded-full bg-gradient-to-r from-ocean-500 to-dream-500 flex items-center justify-center text-white font-bold text-lg">
+                              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-ocean-800 to-ocean-900 flex items-center justify-center text-white font-bold text-base sm:text-lg">
                                 {step.number}
                               </div>
                             </div>
-                            <div className="flex-1">
-                              <div className="flex items-center gap-3 mb-2">
-                                <div className="text-ocean-500 dark:text-ocean-400">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                                <div className="text-ocean-800 dark:text-ocean-400 flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6">
                                   {step.icon}
                                 </div>
-                                <h4 className="text-xl lg:text-2xl font-bold text-foreground dark:text-foreground/95">
+                                <h4 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground dark:text-foreground/95 break-words">
                                   {step.title}
                                 </h4>
                               </div>
-                              <p className="text-foreground/70 dark:text-foreground/80 text-sm sm:text-base leading-relaxed">
+                              <p className="text-foreground/70 dark:text-foreground/80 text-xs sm:text-sm md:text-base leading-relaxed">
                                 {step.details}
                               </p>
                             </div>
@@ -308,7 +171,7 @@ export function About() {
                       </div>
                       
                       {/* Timeline Dot - Only visible on desktop */}
-                      <div className="hidden lg:flex flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-ocean-500 to-dream-500 items-center justify-center z-10 border-4 border-background dark:border-ocean-950 shadow-lg">
+                      <div className="hidden lg:flex flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-ocean-800 to-ocean-900 items-center justify-center z-10 border-4 border-background dark:border-ocean-950 shadow-lg">
                         <div className="w-3 h-3 rounded-full bg-white" />
                       </div>
                       
@@ -321,30 +184,116 @@ export function About() {
             </div>
           </motion.div>
 
+          {/* Platforms We Work With */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.25 }}
+            className="space-y-8"
+          >
+            <div className="text-center space-y-4">
+              <h3 className="text-3xl sm:text-4xl font-bold text-foreground">
+                <span className="bg-gradient-to-r from-ocean-800 to-ocean-900 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
+                  Platforms We Work With
+                </span>
+              </h3>
+              <p className="text-base sm:text-lg text-foreground/70 dark:text-foreground/80 max-w-2xl mx-auto font-medium">
+                We manage and optimize your presence across all major social media platforms.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-6 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 md:gap-6 max-w-4xl mx-auto">
+              {[
+                {
+                  name: 'Instagram',
+                  icon: (
+                    <svg className="w-full h-full" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                  ),
+                },
+                {
+                  name: 'Facebook',
+                  icon: (
+                    <svg className="w-full h-full" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                  ),
+                },
+                {
+                  name: 'LinkedIn',
+                  icon: (
+                    <svg className="w-full h-full" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  ),
+                },
+                {
+                  name: 'WhatsApp',
+                  icon: (
+                    <svg className="w-full h-full" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                  ),
+                },
+                {
+                  name: 'YouTube',
+                  icon: (
+                    <svg className="w-full h-full" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                  ),
+                },
+              ].map((platform, index) => (
+                <motion.div
+                  key={platform.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -6, scale: 1.05 }}
+                  className={cn(
+                    'relative p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl glass hover:glass-strong transition-all duration-300 text-center cursor-default group',
+                    // Mobile: inverted pyramid layout (3 on top, 2 below)
+                    index === 0 && 'col-span-2 col-start-1 sm:col-span-1 sm:col-start-auto',
+                    index === 1 && 'col-span-2 col-start-3 sm:col-span-1 sm:col-start-auto',
+                    index === 2 && 'col-span-2 col-start-5 sm:col-span-1 sm:col-start-auto',
+                    index === 3 && 'col-span-2 col-start-2 sm:col-span-1 sm:col-start-auto',
+                    index === 4 && 'col-span-2 col-start-4 sm:col-span-1 sm:col-start-auto'
+                  )}
+                >
+                  {/* Icon */}
+                  <div className="relative flex justify-center mb-2 sm:mb-3">
+                    <div className={`group-hover:scale-110 transition-transform duration-300 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 ${
+                      platform.name === 'Instagram' ? 'text-[#E4405F]' :
+                      platform.name === 'Facebook' ? 'text-[#1877F2]' :
+                      platform.name === 'LinkedIn' ? 'text-[#0A66C2]' :
+                      platform.name === 'WhatsApp' ? 'text-[#25D366]' :
+                      'text-[#FF0000]'
+                    }`}>
+                      {platform.icon}
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-foreground dark:text-foreground/95 text-xs sm:text-sm md:text-base">
+                    {platform.name}
+                  </h4>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Who We're Built For */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="space-y-8 relative who-we-built-for"
+            className="space-y-8 relative"
           >
-            {/* Ocean Current Flow Background - Subtle */}
-            <div className="absolute inset-0 -z-10 opacity-10 dark:opacity-20">
-              <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-sm" />
-              <motion.div
-                className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-cyan-400 via-sky-400 to-transparent"
-                initial={{ width: '0%' }}
-                whileInView={{ width: '100%' }}
-                viewport={{ once: true }}
-                transition={{ duration: 2, ease: 'easeInOut' }}
-                style={{ filter: 'blur(1px)' }}
-              />
-            </div>
-
             <div className="text-center space-y-4">
               <h3 className="text-3xl sm:text-4xl font-bold text-foreground">
-                <span className="bg-gradient-to-r from-ocean-600 to-dream-600 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-ocean-800 to-ocean-900 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
                   Who We&apos;re Built For
                 </span>
               </h3>
@@ -354,20 +303,16 @@ export function About() {
             </div>
 
             {/* Navigation Line Connecting Cards */}
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent transform -translate-y-1/2 pointer-events-none" style={{ top: '50%', marginTop: '80px' }} />
+            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ocean-800/30 to-transparent transform -translate-y-1/2 pointer-events-none" style={{ top: '50%', marginTop: '80px' }} />
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 relative z-10 max-w-3xl mx-auto">
               {[
                 { 
                   label: 'Local Businesses',
                   trait: 'Built for visibility & trust',
                   icon: (
                     <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      {/* Dock/Route Marker Icon */}
-                      <circle cx="12" cy="12" r="8" strokeDasharray="2 2" opacity="0.3" />
-                      <path d="M12 4 L12 12 L16 16" strokeLinecap="round" strokeLinejoin="round" />
-                      <circle cx="12" cy="12" r="3" />
-                      <path d="M8 12 L16 12 M12 8 L12 16" strokeLinecap="round" opacity="0.6" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                     </svg>
                   )
                 },
@@ -376,10 +321,7 @@ export function About() {
                   trait: 'Designed to scale attention',
                   icon: (
                     <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      {/* Signal/Horizon Arrow Icon */}
-                      <path d="M4 12 L20 12" strokeLinecap="round" />
-                      <path d="M12 4 L20 12 L12 20" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M8 8 L8 16 M16 8 L16 16" strokeLinecap="round" opacity="0.5" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
                   )
                 },
@@ -388,23 +330,7 @@ export function About() {
                   trait: 'Positioned for authority',
                   icon: (
                     <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      {/* Navigation Marker Icon */}
-                      <circle cx="12" cy="12" r="8" strokeDasharray="1 1" opacity="0.3" />
-                      <path d="M12 2 L14 10 L12 12 L10 10 Z" fill="currentColor" />
-                      <path d="M12 12 L12 20" strokeLinecap="round" />
-                      <circle cx="12" cy="12" r="2" fill="currentColor" />
-                    </svg>
-                  )
-                },
-                { 
-                  label: 'Growing Companies',
-                  trait: 'Structured for consistency',
-                  icon: (
-                    <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      {/* Route/Horizon Icon */}
-                      <path d="M2 12 L10 12 L14 16 L22 16" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M2 8 Q6 6 10 8 T18 8 T22 8" strokeLinecap="round" opacity="0.5" />
-                      <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.6" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                     </svg>
                   )
                 },
@@ -413,57 +339,22 @@ export function About() {
                   key={item.label}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="relative p-6 rounded-2xl glass hover:glass-strong transition-all duration-300 text-center cursor-default group overflow-hidden profile-card"
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -6 }}
+                  className="relative px-5 sm:px-6 py-10 sm:py-12 rounded-xl sm:rounded-2xl glass hover:glass-strong transition-all duration-300 text-center cursor-default group"
                 >
-                  {/* Subtle current flow animation on hover */}
-                  <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
-                    animate={{
-                      background: [
-                        'radial-gradient(circle at 0% 50%, rgba(56, 189, 248, 0.2), transparent)',
-                        'radial-gradient(circle at 100% 50%, rgba(132, 204, 22, 0.2), transparent)',
-                        'radial-gradient(circle at 0% 50%, rgba(56, 189, 248, 0.2), transparent)',
-                      ],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  />
-
-                  {/* Icon with glow and pulse */}
-                  <motion.div
-                    className="relative flex justify-center mb-4"
-                    animate={{
-                      y: [0, -4, 0],
-                    }}
-                    transition={{
-                      duration: 3 + index * 0.5,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      delay: index * 0.3,
-                    }}
-                  >
-                    <div className="relative">
-                      {/* Glow effect */}
-                      <div className="absolute inset-0 blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300">
-                        <div className="w-full h-full bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-400 rounded-full" />
-                      </div>
-                      {/* Icon */}
-                      <div className="relative text-cyan-400 dark:text-cyan-300 group-hover:text-cyan-300 dark:group-hover:text-cyan-200 transition-colors duration-300 filter drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]">
-                        {item.icon}
-                      </div>
+                  {/* Icon */}
+                  <div className="flex justify-center mb-4 sm:mb-6">
+                    <div className="text-ocean-800 dark:text-cyan-300 group-hover:text-ocean-900 dark:group-hover:text-cyan-200 transition-colors duration-300 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
+                      {item.icon}
                     </div>
-                  </motion.div>
+                  </div>
 
-                  <h4 className="font-bold text-foreground dark:text-foreground/95 text-base sm:text-lg mb-2">
+                  <h4 className="font-bold text-foreground dark:text-foreground/95 text-sm sm:text-base md:text-lg mb-2 sm:mb-3">
                     {item.label}
                   </h4>
-                  <p className="text-sm text-foreground/60 dark:text-foreground/70 italic">
+                  <p className="text-xs sm:text-sm text-foreground/60 dark:text-foreground/70 italic">
                     {item.trait}
                   </p>
                 </motion.div>
@@ -475,7 +366,7 @@ export function About() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+              transition={{ duration: 0.6 }}
               className="text-center text-base sm:text-lg font-semibold text-foreground/80 dark:text-foreground/90 mt-8"
             >
               Different stages. One clear direction.
@@ -484,33 +375,20 @@ export function About() {
         </div>
       </div>
 
-      {/* Background decorative elements */}
+      {/* Background decorative elements - Reduced for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full opacity-10 blur-3xl"
-            style={{
-              width: `${300 + i * 200}px`,
-              height: `${300 + i * 200}px`,
-              background: `radial-gradient(circle, rgba(24, 144, 255, 0.5), transparent)`,
-              left: `${i * 33}%`,
-              top: `${20 + i * 30}%`,
-            }}
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.1, 0.2, 0.1],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 1.5,
-            }}
-          />
-        ))}
+        <div 
+          className="absolute rounded-full opacity-5 blur-3xl"
+          style={{
+            width: '500px',
+            height: '500px',
+            background: 'radial-gradient(circle, rgba(24, 144, 255, 0.5), transparent)',
+            left: '50%',
+            top: '30%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
       </div>
     </section>
   )
 }
-

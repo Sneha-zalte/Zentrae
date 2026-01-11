@@ -24,9 +24,12 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen py-20 sm:py-32 overflow-hidden bg-gradient-to-b from-background via-ocean-50/30 to-background dark:via-ocean-950/30"
+      className="relative min-h-screen py-20 sm:py-32 overflow-hidden bg-gradient-to-b from-background via-ocean-50/50 to-background dark:from-background dark:via-ocean-950/30 dark:to-background"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Subtle decorative gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-ocean-200/30 via-transparent to-dream-200/30 dark:from-ocean-900/20 dark:via-transparent dark:to-dream-900/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,58,140,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_30%,rgba(40,169,255,0.05),transparent_50%)] pointer-events-none" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div
@@ -37,7 +40,7 @@ export function Contact() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-ocean-500 to-dream-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-ocean-800 to-ocean-900 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
                 Ready to Navigate
               </span>
               <br />
@@ -49,20 +52,20 @@ export function Contact() {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start">
             {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
+              transition={{ duration: 0.6 }}
+              className="space-y-6 sm:space-y-8"
             >
               <div>
-                <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-foreground">
                   Let&apos;s Connect
                 </h3>
-                <p className="text-foreground/70 text-lg leading-relaxed mb-8">
+                <p className="text-foreground/70 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
                   Whether you&apos;re a local business ready to expand your reach or a D2C brand
                   looking to make waves, we&apos;re here to help you navigate the social media
                   landscape with confidence.
@@ -70,7 +73,7 @@ export function Contact() {
               </div>
 
               {/* Contact Details */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {[
                   {
                     title: 'Email',
@@ -108,26 +111,26 @@ export function Contact() {
                     key={item.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-start gap-4 p-6 rounded-2xl glass hover:glass-strong transition-all duration-300 group"
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.4, delay: index * 0.08 }}
+                    className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl glass hover:glass-strong transition-all duration-300 group"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-ocean-500/20 to-dream-500/20 dark:from-ocean-500/30 dark:to-dream-500/30 border border-ocean-500/30 dark:border-ocean-400/30 flex items-center justify-center group-hover:from-ocean-500/30 group-hover:to-dream-500/30 dark:group-hover:from-ocean-500/40 dark:group-hover:to-dream-500/40 transition-all duration-300">
-                      <div className="text-ocean-500 dark:text-ocean-400 group-hover:text-ocean-600 dark:group-hover:text-ocean-300 transition-colors duration-300">
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-ocean-800/20 to-ocean-900/20 dark:from-ocean-500/30 dark:to-dream-500/30 border border-ocean-800/30 dark:border-ocean-400/30 flex items-center justify-center group-hover:from-ocean-800/30 group-hover:to-ocean-900/30 dark:group-hover:from-ocean-500/40 dark:group-hover:to-dream-500/40 transition-all duration-300">
+                      <div className="text-ocean-800 dark:text-ocean-400 group-hover:text-ocean-900 dark:group-hover:text-ocean-300 transition-colors duration-300 w-5 h-5 sm:w-6 sm:h-6">
                         {item.icon}
                       </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
+                    <div className="min-w-0 flex-1">
+                      <h4 className="font-semibold text-sm sm:text-base text-foreground mb-1">{item.title}</h4>
                       {item.link ? (
                         <a
                           href={item.link}
-                          className="text-foreground/70 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors"
+                          className="text-sm sm:text-base text-foreground/70 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors break-words"
                         >
                           {item.content}
                         </a>
                       ) : (
-                        <p className="text-foreground/70">{item.content}</p>
+                        <p className="text-sm sm:text-base text-foreground/70">{item.content}</p>
                       )}
                     </div>
                   </motion.div>
@@ -138,8 +141,8 @@ export function Contact() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: 0.3 }}
                 className="pt-8"
               >
                 <h4 className="font-semibold text-foreground mb-4">Follow Our Journey</h4>
@@ -187,18 +190,15 @@ export function Contact() {
                       href={platform.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.9 }}
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="w-12 h-12 rounded-full glass hover:glass-strong flex items-center justify-center text-foreground/70 hover:text-ocean-500 dark:hover:text-ocean-400 transition-all duration-300 group"
+                      whileHover={{ scale: 1.1 }}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      className="w-12 h-12 rounded-full glass hover:glass-strong flex items-center justify-center text-foreground/70 hover:text-ocean-800 dark:hover:text-ocean-400 transition-all duration-300"
                       aria-label={platform.name}
                     >
-                      <div className="group-hover:scale-110 transition-transform duration-300">
-                        {platform.icon}
-                      </div>
+                      {platform.icon}
                     </motion.a>
                   ))}
                 </div>
@@ -210,10 +210,10 @@ export function Contact() {
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="p-8 sm:p-10 rounded-3xl glass-strong"
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl glass-strong"
             >
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+              <form onSubmit={(e) => e.preventDefault()} className="space-y-4 sm:space-y-5 md:space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     Name *
@@ -225,7 +225,7 @@ export function Contact() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-ocean-500/30 focus:border-ocean-500 focus:ring-2 focus:ring-ocean-500/20 outline-none transition-all duration-300 text-foreground placeholder:text-foreground/40"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-background/50 border border-ocean-800/30 focus:border-ocean-800 focus:ring-2 focus:ring-ocean-800/20 outline-none transition-all duration-300 text-sm sm:text-base text-foreground placeholder:text-foreground/40"
                     placeholder="Your name"
                     aria-required="true"
                     aria-describedby="name-error"
@@ -243,7 +243,7 @@ export function Contact() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-ocean-500/30 focus:border-ocean-500 focus:ring-2 focus:ring-ocean-500/20 outline-none transition-all duration-300 text-foreground placeholder:text-foreground/40"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-background/50 border border-ocean-800/30 focus:border-ocean-800 focus:ring-2 focus:ring-ocean-800/20 outline-none transition-all duration-300 text-sm sm:text-base text-foreground placeholder:text-foreground/40"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -259,7 +259,7 @@ export function Contact() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-ocean-500/30 focus:border-ocean-500 focus:ring-2 focus:ring-ocean-500/20 outline-none transition-all duration-300 text-foreground placeholder:text-foreground/40"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-background/50 border border-ocean-800/30 focus:border-ocean-800 focus:ring-2 focus:ring-ocean-800/20 outline-none transition-all duration-300 text-sm sm:text-base text-foreground placeholder:text-foreground/40"
                     placeholder="+91 9876543210 or 9876543210"
                   />
                 </div>
@@ -274,7 +274,7 @@ export function Contact() {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-ocean-500/30 focus:border-ocean-500 focus:ring-2 focus:ring-ocean-500/20 outline-none transition-all duration-300 text-foreground placeholder:text-foreground/40"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-background/50 border border-ocean-800/30 focus:border-ocean-800 focus:ring-2 focus:ring-ocean-800/20 outline-none transition-all duration-300 text-sm sm:text-base text-foreground placeholder:text-foreground/40"
                     placeholder="Your company name"
                   />
                 </div>
@@ -289,7 +289,7 @@ export function Contact() {
                     required
                     value={formData.category}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-ocean-500/30 focus:border-ocean-500 focus:ring-2 focus:ring-ocean-500/20 outline-none transition-all duration-300 text-foreground"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-background/50 border border-ocean-800/30 focus:border-ocean-800 focus:ring-2 focus:ring-ocean-800/20 outline-none transition-all duration-300 text-sm sm:text-base text-foreground"
                   >
                     <option value="Local Business">Local Business</option>
                     <option value="D2C Brand">D2C Brand</option>
@@ -308,7 +308,7 @@ export function Contact() {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-ocean-500/30 focus:border-ocean-500 focus:ring-2 focus:ring-ocean-500/20 outline-none transition-all duration-300 text-foreground placeholder:text-foreground/40 resize-none"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-background/50 border border-ocean-500/30 focus:border-ocean-500 focus:ring-2 focus:ring-ocean-500/20 outline-none transition-all duration-300 text-sm sm:text-base text-foreground placeholder:text-foreground/40 resize-none"
                     placeholder="Tell us about your project..."
                   />
                 </div>
@@ -316,7 +316,7 @@ export function Contact() {
                 <motion.button
                   type="button"
                   disabled
-                  className="w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 bg-gradient-to-r from-ocean-500/50 to-dream-500/50 text-white/70 cursor-not-allowed shadow-lg opacity-60"
+                  className="w-full py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 bg-gradient-to-r from-ocean-800/50 to-ocean-900/50 text-white/70 cursor-not-allowed shadow-lg opacity-60"
                 >
                   Send Message (Coming Soon)
                 </motion.button>
@@ -326,31 +326,19 @@ export function Contact() {
         </div>
       </div>
 
-      {/* Background decorative elements */}
+      {/* Background decorative elements - Reduced for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full opacity-10 blur-3xl"
-            style={{
-              width: `${250 + i * 100}px`,
-              height: `${250 + i * 100}px`,
-              background: `radial-gradient(circle, rgba(14, 165, 233, 0.6), transparent)`,
-              left: `${15 + i * 20}%`,
-              top: `${20 + i * 15}%`,
-            }}
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.1, 0.2, 0.1],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 1.2,
-            }}
-          />
-        ))}
+        <div 
+          className="absolute rounded-full opacity-5 blur-3xl"
+          style={{
+            width: '500px',
+            height: '500px',
+            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.6), transparent)',
+            left: '50%',
+            top: '40%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
       </div>
     </section>
   )

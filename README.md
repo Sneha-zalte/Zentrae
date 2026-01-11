@@ -78,8 +78,6 @@ npm start
 │   ├── Navigation.tsx      # Main navigation with theme switcher
 │   ├── About.tsx           # About section with GSAP animations
 │   ├── Services.tsx        # Services grid with scroll animations
-│   ├── Portfolio.tsx       # Portfolio showcase
-│   ├── Testimonials.tsx    # Testimonials carousel
 │   ├── Contact.tsx         # Contact form
 │   ├── Footer.tsx          # Footer component
 │   └── ThemeProvider.tsx   # Theme context provider

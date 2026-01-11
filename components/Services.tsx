@@ -1,14 +1,7 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cn } from '@/lib/utils'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
 
 const services = [
   {
@@ -117,49 +110,14 @@ const services = [
 ]
 
 export function Services() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const gridRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const cards = gridRef.current?.children || []
-      
-      gsap.fromTo(
-        cards,
-        {
-          opacity: 0,
-          y: 80,
-          scale: 0.9,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          stagger: {
-            amount: 0.6,
-            from: 'start',
-          },
-          ease: 'back.out(1.7)',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 60%',
-            end: 'bottom 40%',
-            toggleActions: 'play none none reverse',
-          },
-        }
-      )
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
-
   return (
     <section
       id="services"
-      ref={sectionRef}
-      className="relative min-h-screen py-20 sm:py-32 overflow-hidden bg-gradient-to-b from-background via-dream-50/20 to-background dark:via-dream-950/20"
+      className="relative min-h-screen py-20 sm:py-32 overflow-hidden bg-gradient-to-b from-background via-dream-50/50 to-background dark:from-background dark:via-dream-950/20 dark:to-background"
     >
+      {/* Subtle decorative gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-bl from-dream-200/30 via-transparent to-ocean-200/30 dark:from-dream-900/20 dark:via-transparent dark:to-ocean-900/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(14,165,233,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_70%_50%,rgba(14,165,233,0.05),transparent_50%)] pointer-events-none" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -170,7 +128,7 @@ export function Services() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-ocean-600 to-dream-600 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-ocean-800 to-ocean-900 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
               How Zentrae Drives Social Growth
             </span>
           </h2>
@@ -180,96 +138,62 @@ export function Services() {
         </motion.div>
 
         {/* Services Grid */}
-        <div
-          ref={gridRef}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
               whileHover={{ y: -8, scale: 1.02 }}
               className={cn(
-                'group relative p-8 rounded-3xl glass hover:glass-strong',
-                'transition-all duration-500 cursor-default overflow-hidden',
-                index === services.length - 1 && 'sm:col-span-2 lg:col-span-1 lg:mx-auto lg:max-w-md'
+                'group relative p-6 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl glass hover:glass-strong',
+                'transition-all duration-300 cursor-default overflow-hidden',
+                index === 0 && 'md:col-span-2 lg:col-span-2 lg:col-start-1',
+                index === 1 && 'md:col-span-2 lg:col-span-2 lg:col-start-3',
+                index === 2 && 'md:col-span-2 lg:col-span-2 lg:col-start-5',
+                index === 3 && 'md:col-span-2 lg:col-span-2 lg:col-start-2',
+                index === 4 && 'md:col-span-2 lg:col-span-2 lg:col-start-4'
               )}
             >
               {/* Gradient overlay on hover */}
               <div
                 className={cn(
                   'absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10',
-                  'transition-opacity duration-500',
+                  'transition-opacity duration-300',
                   service.gradient
                 )}
               />
 
-              {/* Subtle current flow animation on hover */}
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
-                animate={{
-                  background: [
-                    'radial-gradient(circle at 0% 50%, rgba(56, 189, 248, 0.3), transparent)',
-                    'radial-gradient(circle at 100% 50%, rgba(14, 165, 233, 0.3), transparent)',
-                    'radial-gradient(circle at 0% 50%, rgba(56, 189, 248, 0.3), transparent)',
-                  ],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-
               {/* Content */}
               <div className="relative z-10">
-                {/* Icon with glow and animation */}
-                <motion.div
-                  className="mb-6 flex justify-center"
-                  animate={{
-                    y: [0, -4, 0],
-                  }}
-                  transition={{
-                    duration: 3 + index * 0.5,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay: index * 0.3,
-                  }}
-                >
-                  <div className="relative">
-                    {/* Glow effect */}
-                    <div className="absolute inset-0 blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300">
-                      <div className="w-full h-full bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-400 rounded-full" />
-                    </div>
-                    {/* Icon */}
-                    <div className="relative text-cyan-400 dark:text-cyan-300 group-hover:text-cyan-300 dark:group-hover:text-cyan-200 transition-colors duration-300 filter drop-shadow-[0_0_8px_rgba(56,189,248,0.5)] transform group-hover:scale-110 transition-transform duration-300">
-                      {service.icon}
-                    </div>
+                {/* Icon */}
+                <div className="mb-4 sm:mb-5 md:mb-6 flex justify-center">
+                  <div className="relative text-ocean-800 dark:text-cyan-300 group-hover:text-ocean-900 dark:group-hover:text-cyan-200 transition-colors duration-300 w-10 h-10 sm:w-12 sm:h-12">
+                    {service.icon}
                   </div>
-                </motion.div>
+                </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 text-foreground group-hover:text-ocean-500 dark:group-hover:text-ocean-400 transition-colors duration-300">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-foreground group-hover:text-ocean-800 dark:group-hover:text-ocean-400 transition-colors duration-300">
                   {service.title}
                 </h3>
-                <p className="text-sm text-foreground/60 dark:text-foreground/70 italic mb-4 font-medium">
+                <p className="text-xs sm:text-sm text-foreground/60 dark:text-foreground/70 italic mb-3 sm:mb-4 font-medium">
                   {service.tagline}
                 </p>
-                <p className="text-sm text-foreground/70 dark:text-foreground/80 leading-relaxed mb-4 group-hover:text-foreground/90 transition-colors duration-300">
+                <p className="text-xs sm:text-sm text-foreground/70 dark:text-foreground/80 leading-relaxed mb-4 group-hover:text-foreground/90 transition-colors duration-300">
                   {service.description}
                 </p>
                 
                 {/* Key Points */}
-                <div className="space-y-2 mt-5 pt-4 border-t border-ocean-500/20 dark:border-ocean-500/30">
+                <div className="space-y-2 mt-5 pt-4 border-t border-ocean-800/20 dark:border-ocean-500/30">
                   <p className="text-xs font-semibold text-foreground/50 dark:text-foreground/60 uppercase tracking-wide mb-2">
                     Includes:
                   </p>
                   <ul className="space-y-1.5">
                     {service.points.map((point, pointIndex) => (
                       <li key={pointIndex} className="flex items-start gap-2 text-xs sm:text-sm text-foreground/70 dark:text-foreground/80">
-                        <span className="text-cyan-400 dark:text-cyan-300 mt-1.5 flex-shrink-0">•</span>
+                        <span className="text-ocean-800 dark:text-cyan-300 mt-1.5 flex-shrink-0">•</span>
                         <span>{point}</span>
                       </li>
                     ))}
@@ -278,46 +202,11 @@ export function Services() {
               </div>
 
               {/* Decorative wave effect */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-full group-hover:translate-y-0" />
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-ocean-800 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
           ))}
         </div>
       </div>
-
-      {/* Background decorative waves */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-        <motion.svg
-          className="absolute bottom-0 left-0 w-full h-32"
-          viewBox="0 0 1440 320"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <motion.path
-            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            fill="url(#waveGradient)"
-            opacity={0.2}
-            animate={{
-              d: [
-                'M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z',
-                'M0,128L48,117.3C96,107,192,85,288,101.3C384,117,480,171,576,181.3C672,192,768,160,864,138.7C960,117,1056,107,1152,117.3C1248,128,1344,149,1392,160L1440,171L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z',
-                'M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z',
-              ],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-          <defs>
-            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#1890ff" />
-              <stop offset="100%" stopColor="#0ea5e9" />
-            </linearGradient>
-          </defs>
-        </motion.svg>
-      </div>
     </section>
   )
 }
-

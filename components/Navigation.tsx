@@ -60,8 +60,8 @@ export function Navigation() {
             <Image
               src={theme === 'dark' ? '/images/logo-dark.png' : '/images/logo-light.png'}
               alt="ZENTRAE Logo"
-              width={100}
-              height={32}
+              width={65}
+              height={24}
               className="h-auto w-auto object-contain"
               priority
             />
@@ -74,11 +74,11 @@ export function Navigation() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="text-base lg:text-lg font-medium text-foreground/80 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors relative group whitespace-nowrap"
+                className="text-base lg:text-lg font-medium text-foreground/80 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors relative group whitespace-nowrap"
                 whileHover={{ y: -2 }}
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ocean-500 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ocean-800 group-hover:w-full transition-all duration-300" />
               </motion.a>
             ))}
           </div>
@@ -87,7 +87,7 @@ export function Navigation() {
           <div className="hidden md:flex items-center ml-auto">
             <motion.button
               onClick={toggleTheme}
-              className="p-2.5 rounded-lg glass hover:glass-strong transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-ocean-500"
+              className="p-2.5 rounded-lg glass hover:glass-strong transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-ocean-800"
               whileHover={{ scale: 1.1, rotate: 180 }}
               whileTap={{ scale: 0.9 }}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
@@ -108,7 +108,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg glass"
+            className="md:hidden p-2 rounded-lg glass ml-auto"
             aria-label="Toggle menu"
           >
             <motion.div
@@ -159,7 +159,7 @@ export function Navigation() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="block text-lg font-medium text-foreground/80 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors"
+                  className="block text-lg font-medium text-foreground/80 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors"
                 >
                   {item.label}
                 </motion.a>
@@ -169,7 +169,7 @@ export function Navigation() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.1 }}
-                className="flex items-center gap-2 text-lg font-medium text-foreground/80 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors"
+                className="flex items-center gap-2 text-lg font-medium text-foreground/80 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors"
               >
                 {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
               </motion.button>
