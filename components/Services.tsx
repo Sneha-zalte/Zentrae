@@ -129,11 +129,11 @@ export function Services() {
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-ocean-800 to-ocean-900 dark:from-ocean-400 dark:to-dream-400 bg-clip-text text-transparent">
-              How Zentrae Drives Social Growth
+              How ZENTRAE Drives Social Growth
             </span>
           </h2>
           <p className="text-lg sm:text-xl text-foreground/70 dark:text-foreground/80 max-w-3xl mx-auto text-balance font-medium">
-            We don&apos;t offer random services. We build structured systems that help brands navigate social media with clarity and consistency.
+            ZENTRAE doesn&apos;t offer random services. We build structured systems that help brands navigate social media with clarity and consistency.
           </p>
         </motion.div>
 

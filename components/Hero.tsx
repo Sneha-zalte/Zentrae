@@ -82,7 +82,7 @@ export function Hero() {
             style={{ lineHeight: '1.2', overflow: 'visible' }}
           >
             <span className="block text-ocean-800 dark:bg-gradient-to-r dark:from-gray-100 dark:via-white dark:to-gray-200 dark:bg-clip-text dark:text-transparent drop-shadow-md dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" style={{ display: 'block', overflow: 'visible', lineHeight: '1.2', paddingBottom: '0.25rem' }}>
-              Navigate the Ocean
+              ZENTRAE: Navigate the Ocean
             </span>
             <span className="block -mt-1 sm:-mt-1 text-ocean-900 dark:bg-gradient-to-r dark:from-white dark:via-gray-100 dark:to-gray-200 dark:bg-clip-text dark:text-transparent drop-shadow-md dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.25)]">
               of Social Content
@@ -95,7 +95,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl sm:text-2xl font-semibold text-ocean-800 dark:text-gray-300 dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] max-w-3xl mx-auto leading-relaxed -mt-6 sm:-mt-8 md:-mt-10"
           >
-            We guide local businesses and D2C brands through <br className="hidden sm:block" />
+            ZENTRAE guides local businesses and D2C brands through <br className="hidden sm:block" />
             the ever-changing tides of social media marketing.<br />
             <span className="block mt-2 font-bold text-ocean-900 dark:bg-gradient-to-r dark:from-white dark:via-gray-100 dark:to-gray-300 dark:bg-clip-text dark:text-transparent dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
               Trust ZENTRAE to be your compass.

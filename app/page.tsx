@@ -3,6 +3,7 @@ import { About } from '@/components/About'
 import { Services } from '@/components/Services'
 import { Contact } from '@/components/Contact'
 import { Footer } from '@/components/Footer'
+import { WhatsAppButton } from '@/components/WhatsAppButton'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Services />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </main>
   )
 }

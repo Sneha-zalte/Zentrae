@@ -30,9 +30,9 @@ export default function RootLayout({
     logo: `${siteUrl}/images/logo-light.png`,
     description: 'ZENTRAE - Your trusted social media marketing partner. We help local businesses and D2C brands navigate the digital ocean with strategic content, creative campaigns, and measurable growth.',
     sameAs: [
-      // Add your social media URLs here when available
-      // 'https://www.instagram.com/zentrae',
-      // 'https://www.facebook.com/zentrae',
+      'https://www.instagram.com/zentrae.in',
+      'https://www.facebook.com/share/1AYXLgSinR/',
+      // Add other social media URLs here when available
       // 'https://www.linkedin.com/company/zentrae',
     ],
     contactPoint: {

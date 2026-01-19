@@ -4,6 +4,9 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://zentrae.in'
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: siteUrl,
+  },
   title: {
     default: 'ZENTRAE | Social Media Marketing Agency',
     template: '%s | ZENTRAE',
@@ -41,10 +44,10 @@ export const defaultMetadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: '/',
+    url: siteUrl,
+    siteName: 'ZENTRAE',
     title: 'ZENTRAE | Social Media Marketing Agency',
     description: 'ZENTRAE - Your trusted social media marketing partner. We help local businesses and D2C brands navigate the digital ocean with strategic content, creative campaigns, and measurable growth.',
-    siteName: 'ZENTRAE',
     images: [
       {
         url: '/images/logo-light.png',
