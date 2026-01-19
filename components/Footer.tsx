@@ -51,7 +51,7 @@ export function Footer() {
                 />
               </div>
               <p className="text-sm sm:text-base text-foreground/70 leading-relaxed max-w-md mb-4">
-                Your trusted guide through the ocean of social content. We help local businesses
+                ZENTRAE is your trusted guide through the ocean of social content. We help local businesses
                 and D2C brands navigate the ever-changing tides of social media marketing.
               </p>
               <div className="flex gap-4">
@@ -160,10 +160,10 @@ export function Footer() {
                   </li>
                   <li>
                     <a
-                      href="tel:+918657684375"
+                      href="tel:+919167075095"
                       className="text-foreground/70 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors duration-300 inline-block text-sm sm:text-base"
                     >
-                      8657684375
+                      9167075095
                     </a>
                   </li>
                   <li>

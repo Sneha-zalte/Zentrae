@@ -10,6 +10,8 @@ export const defaultMetadata: Metadata = {
   },
   description: 'ZENTRAE - Your trusted social media marketing partner. We help local businesses and D2C brands navigate the digital ocean with strategic content, creative campaigns, and measurable growth. Transform your online presence today.',
   keywords: [
+    'zentrae',
+    'ZENTRAE',
     'social media marketing',
     'digital marketing',
     'content strategy',
@@ -17,6 +19,11 @@ export const defaultMetadata: Metadata = {
     'social media management',
     'D2C brand marketing',
     'local business marketing',
+    'social media agency Mumbai',
+    'zentrae.in',
+    'zentrae india',
+    'Budget friendly social media marketing',
+    'Social media manager'
   ],
   authors: [{ name: 'ZENTRAE' }],
   creator: 'ZENTRAE',
