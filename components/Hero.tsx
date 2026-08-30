@@ -1,182 +1,118 @@
 'use client'
 
-import { useRef, Suspense, useState, useEffect } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei'
-import { motion, AnimatePresence } from 'framer-motion'
-import { OceanScene } from './OceanScene'
+import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { PageShell } from './SectionIntro'
+
+const ticker = [
+  'REELS',
+  'HOOKS',
+  'VIRAL',
+  'STORIES',
+  'GROWTH',
+  'BRAND',
+  'SCROLL',
+  'ENGAGE',
+  'D2C',
+  'LOCAL',
+]
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [contentVisible, setContentVisible] = useState(false)
-
-  useEffect(() => {
-    // Delay content visibility to let Canvas initialize first
-    const timer = setTimeout(() => {
-      setContentVisible(true)
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
     <section
       id="home"
-      ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-background via-background to-background dark:from-ocean-950 dark:via-dream-950 dark:to-background"
-      style={{ overflowY: 'visible' }}
+      className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-gradient-to-b from-ocean-50 via-white to-background dark:from-ocean-950 dark:via-[#06101c] dark:to-background"
     >
-      {/* 3D Ocean Background */}
-      <div className="absolute inset-0 w-full h-full z-0" aria-hidden="true">
-        <Canvas
-          dpr={[1, 2]}
-          gl={{ 
-            antialias: true, 
-            alpha: true, 
-            powerPreference: 'high-performance',
-            preserveDrawingBuffer: false,
-          }}
-          performance={{ min: 0.5 }}
-        >
-          <Suspense fallback={null}>
-            <PerspectiveCamera makeDefault position={[0, 5, 10]} fov={60} />
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[10, 10, 5]} intensity={1} />
-            <pointLight position={[-10, -10, -5]} intensity={0.5} color="#1890ff" />
-            <OceanScene />
-            <OrbitControls
-              enableZoom={false}
-              enablePan={false}
-              autoRotate
-              autoRotateSpeed={0.5}
-              minPolarAngle={Math.PI / 3}
-              maxPolarAngle={Math.PI / 2.2}
-            />
-            <Environment preset="sunset" />
-          </Suspense>
-        </Canvas>
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="hero-aurora hero-aurora-a" />
+        <div className="hero-aurora hero-aurora-b" />
+        <div className="hero-aurora hero-aurora-core" />
+        <div className="hero-grid" />
+        <p className="absolute -right-4 top-[18%] rotate-90 origin-top-right font-display text-[12vw] leading-none font-bold text-ocean-500/[0.07] dark:text-white/[0.05] select-none tracking-tighter">
+          ZENTRAE
+        </p>
       </div>
 
-      {/* Content Overlay */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center overflow-visible" style={{ overflow: 'visible' }}>
-        {/* Backdrop for better text visibility */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
-          <div className="w-full max-w-5xl mx-auto px-6 py-20 rounded-3xl backdrop-blur-sm bg-white/10 dark:bg-black/10 opacity-0 dark:opacity-0" />
-        </div>
-        
-        <AnimatePresence>
-          {contentVisible && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="relative z-10 space-y-2 sm:space-y-3 md:space-y-4 overflow-visible"
-              style={{ overflow: 'visible' }}
-            >
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight"
-            style={{ lineHeight: '1.2', overflow: 'visible' }}
-          >
-            <span className="block text-ocean-800 dark:bg-gradient-to-r dark:from-gray-100 dark:via-white dark:to-gray-200 dark:bg-clip-text dark:text-transparent drop-shadow-md dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" style={{ display: 'block', overflow: 'visible', lineHeight: '1.2', paddingBottom: '0.25rem' }}>
-              ZENTRAE: Navigate the Ocean
-            </span>
-            <span className="block -mt-1 sm:-mt-1 text-ocean-900 dark:bg-gradient-to-r dark:from-white dark:via-gray-100 dark:to-gray-200 dark:bg-clip-text dark:text-transparent drop-shadow-md dark:drop-shadow-[0_0_12px_rgba(255,255,255,0.25)]">
-              of Social Content
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl sm:text-2xl font-semibold text-ocean-800 dark:text-gray-300 dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] max-w-3xl mx-auto leading-relaxed -mt-6 sm:-mt-8 md:-mt-10"
-          >
-            ZENTRAE guides local businesses and D2C brands through <br className="hidden sm:block" />
-            the ever-changing tides of social media marketing.<br />
-            <span className="block mt-2 font-bold text-ocean-900 dark:bg-gradient-to-r dark:from-white dark:via-gray-100 dark:to-gray-300 dark:bg-clip-text dark:text-transparent dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
-              Trust ZENTRAE to be your compass.
-            </span>
-          </motion.p>
-
+      <PageShell className="relative z-10 w-full pt-28 pb-10 sm:pb-14">
+        <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 lg:gap-6 items-end">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex justify-center items-center pt-6 sm:pt-8 md:pt-10"
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <motion.a
-              href="#contact"
-              className={cn(
-                'px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg md:text-xl',
-                'bg-ocean-800 hover:bg-ocean-900 text-white',
-                'dark:bg-ocean-600 dark:hover:bg-ocean-700 dark:text-white',
-                'transition-all duration-300 shadow-lg hover:shadow-xl',
-                'transform hover:scale-105 active:scale-95',
-                'no-underline relative tracking-wide',
-                'flex items-center justify-center gap-2 sm:gap-3'
-              )}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Start Your Journey
-              <motion.svg
-                width="18"
-                height="18"
-                className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                whileHover={{ x: 4 }}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="rounded-full border-2 border-ocean-800/50 bg-ocean-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-ocean-900 dark:border dark:border-ocean-400/40 dark:bg-ocean-500/10 dark:text-ocean-200">
+                Social systems
+              </span>
+              <span className="text-xs font-medium text-ocean-800/80 dark:text-ocean-200/70">Mumbai · India</span>
+            </div>
+
+            <h1 className="font-display font-bold tracking-[-0.06em] leading-[0.92] text-ocean-950 dark:text-white">
+              <span className="block text-[clamp(2.8rem,12vw,7.5rem)]">Stop the</span>
+              <span className="block text-[clamp(2.8rem,12vw,7.5rem)] text-outline">scroll.</span>
+              <span className="mt-2 block text-[clamp(2.1rem,8vw,5rem)] text-ocean-800 dark:text-ocean-200">
+                Own the feed.
+              </span>
+            </h1>
+
+            <p className="mt-8 max-w-md text-base sm:text-lg leading-7 text-ocean-950/80 dark:text-ocean-100/75">
+              ZENTRAE builds social systems for local businesses and D2C brands — strategy, content, and growth that actually moves.
+            </p>
+
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <a
+                href="#contact"
+                className={cn(
+                  'inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold uppercase tracking-[0.12em]',
+                  'bg-ocean-800 text-white hover:bg-ocean-900',
+                  'dark:bg-ocean-400 dark:text-ocean-950 dark:hover:bg-ocean-300',
+                  'shadow-lg shadow-ocean-900/20 dark:shadow-[0_8px_24px_rgba(24,144,255,0.22)] no-underline transition-transform hover:scale-[1.03]'
+                )}
               >
-                <path
-                  d="M5 12H19M19 12L12 5M19 12L12 19"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </motion.svg>
-            </motion.a>
+                Make waves
+              </a>
+              <a
+                href="#services"
+                className="text-sm font-semibold text-ocean-900 hover:text-ocean-700 dark:text-ocean-100/80 dark:hover:text-ocean-300 no-underline"
+              >
+                See the system →
+              </a>
+            </div>
           </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
           <motion.div
-            key={i}
-            className="absolute rounded-full opacity-20 blur-3xl"
-            style={{
-              width: `${200 + i * 100}px`,
-              height: `${200 + i * 100}px`,
-              background: `radial-gradient(circle, ${
-                i % 2 === 0 ? 'rgba(24, 144, 255, 0.4)' : 'rgba(14, 165, 233, 0.4)'
-              }, transparent)`,
-              left: `${20 + i * 15}%`,
-              top: `${10 + i * 20}%`,
-            }}
-            animate={{
-              x: [0, 50, 0],
-              y: [0, 50, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 10 + i * 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 0.5,
-            }}
-          />
-        ))}
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.15 }}
+            className="relative hidden lg:block"
+          >
+            <div className="absolute -top-8 right-0 rotate-6 rounded-2xl border-2 border-ocean-800/30 bg-white shadow-md dark:border dark:border-white/15 dark:bg-white/[0.06] dark:shadow-none px-5 py-4">
+              <p className="font-display text-4xl font-bold tracking-tight text-ocean-800 dark:text-ocean-100">7</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ocean-800/70 dark:text-ocean-200/70">step growth loop</p>
+            </div>
+            <div className="mt-28 -rotate-3 rounded-3xl border-2 border-ocean-950 bg-ocean-900 text-white p-6 dark:border-white/10 dark:bg-ocean-950/80">
+              <p className="font-display text-2xl font-bold leading-tight">
+                Drama in the feed.
+                <span className="block text-ocean-200">Discipline in the system.</span>
+              </p>
+              <p className="mt-3 text-sm text-white/70">
+                Hooks, reels, community, reports — not random posts.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </PageShell>
+
+      <div className="relative z-10 border-y border-ocean-500/20 bg-ocean-950 text-white dark:bg-ocean-500/10 overflow-hidden py-3">
+        <div className="marquee-track gap-10 px-4">
+          {[...ticker, ...ticker].map((item, i) => (
+            <span key={`${item}-${i}`} className="flex items-center gap-10 shrink-0">
+              <span className="font-display text-sm sm:text-base font-bold tracking-[0.25em]">{item}</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-ocean-400 shadow-[0_0_10px_rgba(64,169,255,1)]" />
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   )
 }
-

@@ -6,7 +6,22 @@ const nextConfig = {
     domains: [],
   },
   experimental: {
-    optimizePackageImports: ['@react-three/fiber', '@react-three/drei'],
+    optimizePackageImports: ['framer-motion'],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.zentrae.in',
+          },
+        ],
+        destination: 'https://zentrae.in/:path*',
+        permanent: true,
+      },
+    ]
   },
 }
 

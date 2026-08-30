@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useTheme } from './ThemeProvider'
 import { cn } from '@/lib/utils'
 
@@ -17,6 +18,8 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
+  const pathname = usePathname()
+  const onHome = pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +29,10 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const navHref = (href: string) => (onHome ? href : `/${href}`)
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!onHome) return
     e.preventDefault()
     const element = document.querySelector(href)
     if (element) {
@@ -51,7 +57,7 @@ export function Navigation() {
         <div className="flex items-center w-full relative">
           {/* Logo - Left Corner with Top Padding */}
           <motion.a
-            href="#home"
+            href={navHref('#home')}
             onClick={(e) => handleNavClick(e, '#home')}
             className="relative flex items-center h-7 sm:h-8 pt-2 sm:pt-3 flex-shrink-0"
             whileHover={{ scale: 1.05 }}
@@ -72,9 +78,9 @@ export function Navigation() {
             {navItems.map((item) => (
               <motion.a
                 key={item.href}
-                href={item.href}
+                href={navHref(item.href)}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="text-base lg:text-lg font-medium text-foreground/80 hover:text-ocean-800 dark:hover:text-ocean-400 transition-colors relative group whitespace-nowrap"
+                className="text-sm font-medium text-ocean-950 hover:text-ocean-700 dark:text-foreground/80 dark:hover:text-white transition-colors relative group whitespace-nowrap"
                 whileHover={{ y: -2 }}
               >
                 {item.label}
@@ -83,11 +89,17 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Theme Toggle - Right Corner */}
-          <div className="hidden md:flex items-center ml-auto">
+          <div className="hidden md:flex items-center gap-3 ml-auto">
+            <a
+              href={navHref('#contact')}
+              onClick={(e) => handleNavClick(e, '#contact')}
+              className="rounded-full px-5 py-2 text-sm font-semibold no-underline bg-ocean-800 text-white hover:bg-ocean-900 dark:bg-ocean-400 dark:text-ocean-950 dark:hover:bg-ocean-300 transition-colors"
+            >
+              Talk to us
+            </a>
             <motion.button
               onClick={toggleTheme}
-              className="p-2.5 rounded-lg glass hover:glass-strong transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-ocean-800"
+              className="p-2.5 rounded-lg border-2 border-ocean-800/35 bg-white text-ocean-900 shadow-sm hover:bg-ocean-50 dark:border dark:border-white/15 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-ocean-800"
               whileHover={{ scale: 1.1, rotate: 180 }}
               whileTap={{ scale: 0.9 }}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
@@ -154,7 +166,7 @@ export function Navigation() {
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.href}
-                  href={item.href}
+                  href={navHref(item.href)}
                   onClick={(e) => handleNavClick(e, item.href)}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -164,6 +176,13 @@ export function Navigation() {
                   {item.label}
                 </motion.a>
               ))}
+              <a
+                href={navHref('#contact')}
+                onClick={(e) => handleNavClick(e, '#contact')}
+                className="inline-flex rounded-full px-5 py-2 text-sm font-semibold no-underline bg-ocean-800 text-white"
+              >
+                Talk to us
+              </a>
               <motion.button
                 onClick={toggleTheme}
                 initial={{ opacity: 0, x: -20 }}
